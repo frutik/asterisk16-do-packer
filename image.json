@@ -1,0 +1,24 @@
+{
+  "variables": {
+    "api_key": "{{ env `API_KEY` }}"
+  },
+  "builders": [
+    {
+      "type": "digitalocean",
+      "api_token": "{{ user `api_key` }}",
+      "image": "centos-7-x64",
+      "region": "ams3",
+      "size": "s-1vcpu-1gb",
+      "private_networking": true,
+      "monitoring": true,
+      "snapshot_name": "pbx-{{timestamp}}",
+      "ssh_username": "root"
+    }
+  ],
+  "provisioners": [
+      {
+        "type": "shell",
+        "script": "install.sh"
+      }
+  ] 
+}
